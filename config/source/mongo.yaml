@@ -1,0 +1,8 @@
+host: "custom-host"
+port: 27017
+user: "custom-user"
+password: "custom-password"
+database: "custom-database"
+collections:
+  - "col-1"
+  - "col-2"
