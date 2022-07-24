@@ -2,6 +2,7 @@ package connector
 
 import (
 	"fmt"
+	"github.com/Kamran151199/dbmigrate/internal/domain"
 	errors "github.com/Kamran151199/dbmigrate/pkg/error"
 	"github.com/Kamran151199/dbmigrate/pkg/storage/postgresql"
 	"github.com/jmoiron/sqlx"
@@ -13,13 +14,13 @@ type postgresqlConnector struct {
 	client *postgresql.Storage
 }
 
-func NewPostgresqlConnector(dto PostgresqlConnectorDTO) (Connector, error) {
+func NewPostgresqlConnector(connection domain.Postgres) (Connector, error) {
 	client := postgresql.Storage{
-		Host:     dto.Host,
-		Port:     dto.Port,
-		Database: dto.Database,
-		User:     dto.User,
-		Password: dto.Password,
+		Host:     connection.Host,
+		Port:     connection.Port,
+		Database: connection.Database,
+		User:     connection.User,
+		Password: connection.Password,
 	}
 
 	return &postgresqlConnector{

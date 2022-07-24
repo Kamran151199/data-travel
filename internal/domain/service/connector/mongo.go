@@ -2,6 +2,7 @@ package connector
 
 import (
 	"fmt"
+	"github.com/Kamran151199/dbmigrate/internal/domain"
 	errors "github.com/Kamran151199/dbmigrate/pkg/error"
 	mongodb "github.com/Kamran151199/dbmigrate/pkg/storage/mongo"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -24,13 +25,13 @@ func (m mongoConnector) Connect() error {
 	return nil
 }
 
-func NewMongoConnector(dto MongoConnectorDTO) (Connector, error) {
+func NewMongoConnector(connection domain.Mongo) (Connector, error) {
 	client := mongodb.Storage{
-		Host:     dto.Host,
-		Port:     dto.Port,
-		User:     dto.User,
-		Password: dto.Password,
-		Database: dto.Database,
+		Host:     connection.Host,
+		Port:     connection.Port,
+		User:     connection.User,
+		Password: connection.Password,
+		Database: connection.Database,
 	}
 
 	return &mongoConnector{
